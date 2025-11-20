@@ -1,0 +1,432 @@
+This response extracts the key code snippets, commands, and theoretical concepts from the source material, structured by the implied weekly progression of the experiments described in the DevOps Lab Manual.
+### Weekly Code and Theory Extraction
+#### Week 1: Simple Event Registration Form (HTML & JavaScript)
+Theory/Aim: To create a basic event registration form using HTML and JavaScript. This exercise corresponds to writing code for a simple user registration form for an event.
+Code (HTML & JavaScript):
+A portion of the registration form HTML and JavaScript validation function:
+```<form id="registrationForm" onsubmit="return validateForm()">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" required>
+    <label for="email">Email</label>
+    <input type="email" id="email" required>
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" required pattern="{10}">
+    <label for="event">Select Event</label>
+    <select id="event" required>
+        <option value="">--Select--</option>
+        <option value="workshop">Workshop</option>
+        <option value="seminar">Seminar</option>
+        <option value="conference">Conference</option>
+    </select>
+    <button type="submit">Register</button>
+</form>
+<script>
+function validateForm() {
+    const phone = document.getElementById('phone').value;
+    if (!/^\d{10}$/.test(phone)) {
+        alert('Invalid phone number');
+        return false;
+    }
+    alert('Registration Successful!');
+    return true;
+}
+</script>
+
+```
+#### Week 2: Explore Git and GitHub Commands
+Theory/Aim: To explore basic Git and GitHub commands. Git and GitHub are popular tools used for version control and collaboration in software development.
+Key Commands:
+			Command
+			Description
+			$ git init
+			Initializing a Git repository.
+			$ git status
+			Checking the status of your repository.
+			$ git add <file-name>
+			Adding files to the stage.
+			$ git commit -m "commit message"
+			Committing changes.
+			$ git log
+			Checking the commit history.
+			$ git checkout <file-name>
+			Undoing changes.
+			$ git branch <branch-name>
+			Creating a new branch.
+			$ git clone <repository-url>
+			Cloning a repository from GitHub.
+			$ git push origin <branchname>
+			Pushing changes to a remote repository.
+#### Week 3: Practice Source Code Management on GitHub
+Theory/Aim: To push and manage source code using GitHub, practicing source code management with the code from Exercise 1.
+Key Commands (Source Code Management Workflow):
+```# Clone the repository to your local machine
+$ git clone <repositoryurl>
+
+# Move to the repository directory
+$ cd <repository-name>
+
+# Stage the changes (assuming a file was added)
+$ git add <file-name>
+
+# Commit the changes
+$ git commit -m "Added source code for a simple user registration form"
+
+# Push the changes to the remote repository
+$ git push origin master
+
+```
+#### Week 4: Jenkins Installation and Setup
+Theory/Aim: To install and configure Jenkins on Windows OS. Jenkins is configured by unlocking it, installing suggested plugins, and creating the first admin user.
+Key Procedural/Configuration Steps (Theory):
+- Download and run the jenkins.msi installation file.
+- Select the install destination folder.
+- Enter and verify credentials for running the service.
+- Enter and test the port number Jenkins will run on.
+- Select the directory where Java is installed.
+- Unlock Jenkins using the password copied from the initialAdminPassword file.
+- Customize Jenkins by clicking the Install suggested plugins button.
+#### Week 5: Integrate Java Project with Jenkins (CI/CD Demonstration)
+Theory/Aim: To create a Java program and automate the build process via Jenkins, demonstrating continuous integration and development. The process involves committing code to Git, creating a Jenkins job, configuring source code management (Git URL), setting build triggers, and defining build steps.
+Code (Simple Java Program):
+The application file named Demo.java:
+```public class Demo {
+public static void main (String args[])
+{
+System.out.println(“hello world”);
+}
+}
+
+```
+Key Jenkins Configuration Commands/Settings (Theory):
+- Source Code Management: Select Git and paste the Repository URL.
+- Branches to build: Specify master.
+- Build Triggers: Select POLL SCM and schedule it as H/5 * * * *.
+- Build Step: Select Execute windows batch command (used to run the Java program).
+#### Week 6: Basic Docker Commands for Content Management
+**Theory:**Docker is a containerization platform used to package applications and their dependencies into containers. A Docker Image is a read-only template used for creating containers. Docker follows a Client-Server architecture.
+Key Commands:
+			Command
+			Description
+			docker --version or docker -v
+			Get the current version of Docker.
+			docker pull hello-world
+			Download an image from a registry.
+			docker run hello-world
+			Create a container from an image.
+			docker ps
+			Lists currently running containers.
+			docker ps -a
+			Lists all containers (running & stopped).
+			docker build -t <image_name> .
+			Build an Image from a Dockerfile.
+			docker images
+			List local images.
+			docker rmi <image_name>
+			Delete an Image.
+			docker run --name <container_name> <image_name>
+			Create and run a container with a custom name.
+			docker run -p <host_port>:<container_port> <image_name>
+			Run a container and publish its port(s).
+			`docker start
+			stop <container_name>`
+#### Week 7: Create a Simple Java Containerized Application using Docker
+Theory/Aim: To develop a simple application (Java program) and containerize it using Docker.
+Code (Java Program - Test.java):
+```public class Test
+{
+public static void main(String[] args)
+{
+int a=20,b=30,c;
+c=a*b;
+System.out.println("Hello world");
+System.out.println("value of c is "+c);
+}
+}
+
+```
+Code (Dockerfile):
+This script compiles the Java program and sets the command to run the application:
+```FROM openjdk         # uses the base image –openjdk with java installed
+WORKDIR /sam         # Set the working directory
+COPY.  /sam          # Copies all the files to working directory
+RUN javac Test.java  # Compile the Java program
+CMD ["java", "Test"] # Set the default command to run the Java program
+
+```
+Key Commands:
+			Command
+			Purpose
+			docker build -t helloworld .
+			Builds the Docker image based on the Dockerfile.
+			docker run --name mycontainer myimage
+			Starts a new container based on the image.
+			docker logs mycontainer
+			Displays the output of the container.
+#### Week 8: Integrate Kubernetes with Docker
+Theory/Aim: To enable Kubernetes on Docker Desktop and prepare the system to run Kubernetes commands. Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of container-based applications.
+Key Theory/Differences:
+- Docker is used for building, shipping, and running containers; it provides isolated environments.
+- Kubernetes focuses on orchestrating containers (managing, scaling, and ensuring smooth operation of large collections of containers).
+- Docker manages individual containers, while Kubernetes manages multiple containers across clusters.
+- Kubernetes Components: The architecture includes the Control Plane (API Server, Scheduler, Controller Manager, etcd) and Nodes (Container runtime, kubelet, kube-proxy).
+Key Commands (Verification):
+```kubectl version –client
+kubectl get pods
+
+```
+#### Week 9: Automate the Running of a Containerized Application
+Theory/Aim: Automate the process of running a containerized application using Kubernetes. This involves creating a Docker image, pushing it to a registry, and defining a Kubernetes Deployment (to manage replicas) and a Service (for networking and load balancing).
+Code (Java Program - Test.java - HTTP Server):
+This version includes an HTTP server listening on port 8080:
+```// ... imports and class definition
+public static void main(String[] args) throws IOException
+{
+int port = 8080; // Port on which the server will listen
+System.out.println("Starting server on port " + port);
+HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+server.createContext("/", (exchange -> {
+String response = "Hello, Kubernetes!";
+exchange.sendResponseHeaders(200, response.getBytes().length);
+exchange.getResponseBody().write(response.getBytes());
+exchange.close();
+}));
+// ... server execution logic
+}
+
+```
+Code (Dockerfile):
+Includes exposing port 8080:
+```# Use OpenJDK base image
+FROM openjdk:17-alpine
+# ... (WORKDIR and COPY commands)
+RUN javac Test.java
+# Expose port 8080 for the application
+EXPOSE 8080
+# Run the Java application
+CMD ["java", "Test"]
+
+```
+Code (Kubernetes Deployment YAML):
+Manages 3 replicas of the Java application:
+```apiVersion: apps/v1
+kind: Deployment
+metadata:
+name: my-java-app
+spec:
+replicas: 3
+selector:
+matchLabels:
+app: my-java-app
+template:
+# ... metadata/labels
+spec:
+containers:
+- name: my-java-app
+image: ranjithkr24/my-java-app:latest
+ports:
+- containerPort: 8080
+env:
+- name: PORT
+value: "8080"
+
+```
+Code (Kubernetes Service YAML):
+Defines a NodePort service to expose the application externally on port 30007:
+```apiVersion: v1
+kind: Service
+metadata:
+name: my-java-app-service
+spec:
+selector:
+app: my-java-app
+ports:
+- protocol: TCP
+port: 80          # Port exposed inside the cluster
+targetPort: 8080  # Port your Java app is running on
+nodePort: 30007   # External port
+type: NodePort
+
+```
+Key Commands:
+			Command
+			Purpose
+			kubectl apply -f deployment.yaml
+			Apply the deployment configuration.
+			kubectl apply -f service.yaml
+			Apply the service configuration.
+			kubectl get deployments
+			Check deployment status.
+			http://localhost:30007
+			Access the application externally.
+#### Week 10: Install and Explore Selenium for Automated Testing
+Theory/Aim: To install and explore Selenium for automated testing. Selenium is an open-source tool used for automating web browsers. The Selenium WebDriver API allows programmatic interaction with web pages.
+Key Commands (Setup):
+			Command
+			Purpose
+			node -v
+			Verify Node.js installation.
+			npm init -y
+			Initialize a Node.js project.
+			npm install selenium-webdriver
+			Install the Selenium WebDriver package.
+Code (JavaScript Test Script - Test.js):
+A test script using Selenium WebDriver to perform a Google search:
+```const { Builder, By, Key, until } = require('selenium-webdriver');
+async function testGoogleSearch() {
+    // Step 1: Launch the Chrome browser
+    let driver = await new Builder().forBrowser('chrome').build();
+    try {
+        // Step 2: Open the Google homepage
+        await driver.get('https://www.google.com');
+        // Step 3: Locate the search box and enter a search query
+        await driver.findElement(By.name('q')).sendKeys('Selenium WebDriver', Key.RETURN);
+        // Step 4: Wait for the search results to load
+        await driver.wait(until.titleContains('Selenium WebDriver'), 5000);
+        // ... (Verification and printing title)
+    } finally {
+        // Step 7: Close the browser
+        await driver.quit();
+    }
+}
+testGoogleSearch();
+
+```
+Key Selenium Components (Theory):
+- Builder: Used to create a new browser instance.
+- By: Used to locate elements on the web page (e.g., By.id, By.name).
+- Key: Simulates keyboard actions.
+- until: Used for waiting until a condition is met.
+#### Week 11: JavaScript Registration Form Testing using Selenium
+Theory/Aim: To create a simple registration form using HTML and JavaScript and perform automated functional testing using Selenium.
+Code (HTML/CSS/JavaScript - index.html):
+A snippet showing the form elements and inline validation script:
+```<!-- Registration Form -->
+<form id="registrationForm">
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username" placeholder="Enter username" required><br>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" placeholder="Enter email" required><br>
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" placeholder="Enter password" required><br>
+    <button type="submit">Register</button>
+</form>
+<!-- ... -->
+<script>
+document.getElementById("registrationForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form from submitting
+    // Get input values and validate...
+    // Check for valid email format
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        messageElement.textContent = "Invalid email format!";
+        messageElement.classList.add("error");
+        return;
+    }
+    // ... show success message
+    messageElement.textContent = "Registration Successful!";
+    // ...
+});
+</script>
+
+```
+Code (Selenium Test Script - test.js):
+Script to navigate to the local server, fill the form, click submit, and check the success message:
+```// ... setup WebDriver
+async function testRegistrationForm() {
+    let driver = await new Builder().forBrowser('chrome').build();
+    try {
+        await driver.get('http://localhost:8080');
+        // Enter username, email, password
+        await driver.findElement(By.id('username')).sendKeys('student1');
+        await driver.findElement(By.id('email')).sendKeys('student1@example.com');
+        await driver.findElement(By.id('password')).sendKeys('password123');
+        // Click the Register button
+        await driver.findElement(By.css('button[type="submit"]')).click();
+        // Wait for the success message to appear
+        await driver.wait(until.elementLocated(By.id('message')), 5000);
+        // Get the message text
+        let message = await driver.findElement(By.id('message')).getText();
+        console.log('Test Result:', message);
+        // ... (Verification logic)
+    } finally {
+        await driver.quit();
+    }
+}
+testRegistrationForm();
+
+```
+#### Week 12: Node.js Registration Form, Docker Containerization, and Selenium Testing
+Theory/Aim: To host a simple Node.js registration form in a Docker container and use Selenium WebDriver for automated testing.
+Code (Node.js Dependencies - package.json snippet):
+Uses express (web framework) and body-parser (middleware for handling form data):
+```"dependencies": {
+    "express": "^4.18.2",
+    "body-parser": "^1.20.2"
+}
+
+```
+Code (Node.js Server - app.js snippet):
+Sets up an Express server listening on port 3000 and handles the POST request:
+```const express = require('express');
+const bodyParser = require('body-parser');
+// ...
+app.post('/register', (req, res) => {
+    const{ username, email, password } = req.body;
+    console.log(`Username: ${username}, Email: ${email}`);
+    res.send('Registration successful!');
+});
+// Start the server on port 3000
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+```
+Code (Dockerfile):
+Used to containerize the Node.js application:
+```FROM node:14
+WORKDIR /usr/src/app
+COPY package.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["npm", "start"]
+
+```
+Code (Selenium Test Script - test_registration.js snippet):
+Script to test the containerized application running on http://localhost:3000:
+```// ... setup WebDriver
+async function runTest() {
+    let driver = await new Builder().forBrowser('chrome').build();
+    try {
+        // Open the registration form
+        await driver.get('http://localhost:3000');
+        // Fill in the registration form
+        await driver.findElement(By.id('username')).sendKeys('testuser');
+        await driver.findElement(By.id('email')).sendKeys('testuser@example.com');
+        await driver.findElement(By.id('password')).sendKeys('password123');
+        // Submit the form
+        await driver.findElement(By.tagName('button')).click();
+        // Wait for the response and verify the result
+        let bodyText = await driver.findElement(By.tagName('body')).getText();
+        if (bodyText.includes('Registration successful!')) {
+            console.log('Test Passed: Registration was successful.');
+        } else {
+            console.log('Test Failed: Registration was not successful.');
+        }
+    } finally {
+        await driver.quit();
+    }
+}
+runTest();
+
+```
+Key Docker Commands:
+			Command
+			Purpose
+			docker build -t nodejs-registration-app .
+			Build the Docker image.
+			docker run -d -p 3000:3000 --name nodejs-registration nodejs-registration-app
+			Run the container, mapping port 3000.
+			node test_registration.js
+			Run the Selenium test script.
